@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+
+  halloween-horror-night:
+    image: halloween-horror-night
+    container_name: halloween-horror-night
+    build:
+      context: .
+    ports:
+      - '${APP_PORT}:${APP_PORT}'
+    volumes:
+      - './halloween-horror-night:/halloween-horror-night'
+      - node_modules:/halloween-horror-night/node_modules
+      - build:/halloween-horror-night/.next
+    env_file:
+      - .env
+
+volumes:
+  node_modules:
+  build:

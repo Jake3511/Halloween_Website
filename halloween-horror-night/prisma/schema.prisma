@@ -1,0 +1,14 @@
+model User {
+    id              Int         @id @default(autoincrement())
+    createdAt       DateTime    @default(now())
+    name            String
+    favoriteFood    FavoriteFood?              
+}
+
+model FavoriteFood {
+    id          Int         @id @default(autoincrement())
+    createdAt   DateTime    @default(now())
+    food        String
+    UserId      Int         @unique()      
+    user        User        @relation(fields: [UserId], references: [id])
+}
