@@ -2,13 +2,14 @@ ARG NODE_VERSION=24.14.0-slim
 
 FROM node:${NODE_VERSION} AS dependencies
 
-WORKDIR /halloween-horror-night
+# arbitrary directory, refers to containers directory.
+WORKDIR /app
 
-COPY ./halloween-horror-night/package.json ./halloween-horror-night/package-lock.json ./
+COPY ./package.json ./package-lock.json ./
 
 RUN npm install
 
-COPY ./halloween-horror-night .
+COPY ./ .
 
 CMD ["npm", "run", "dev"]
 

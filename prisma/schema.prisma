@@ -1,8 +1,17 @@
+datasource db {
+    provider = "postgresql"
+}
+generator client {
+    provider = "prisma-client"
+    output = "./generated"
+}
+
 model User {
     id              Int         @id @default(autoincrement())
     createdAt       DateTime    @default(now())
     name            String
-    favoriteFood    FavoriteFood?              
+    attending       Boolean
+    favoriteFood    FavoriteFood? 
 }
 
 model FavoriteFood {
@@ -10,5 +19,5 @@ model FavoriteFood {
     createdAt   DateTime    @default(now())
     food        String
     UserId      Int         @unique()      
-    user        User        @relation(fields: [UserId], references: [id])
+    user        User        @relation(fields: [UserId], references: [id], onDelete: Cascade)
 }
