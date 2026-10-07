@@ -22,7 +22,7 @@
 /* Descriptor for new font family */
 @font-face {
   font-family: 'EFCO Brookshire';
-  src: url('/halloween-horror-night/public/fonts/EFCO\ Brookshire.woff2') format(".woff2");
+  src: url('/fonts/EFCO-Brookshire.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
