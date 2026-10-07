@@ -24,6 +24,7 @@
   font-family: 'EFCO Brookshire';
   src: url('/fonts/EFCO-Brookshire.woff2') format('woff2');
   font-weight: 400;
+  color: black;
   font-style: normal;
   font-display: swap;
 }
