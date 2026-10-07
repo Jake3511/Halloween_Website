@@ -1,19 +1,21 @@
 ARG NODE_VERSION=24.14.0-slim
+FROM node:${NODE_VERSION}
 
-FROM node:${NODE_VERSION} AS dependencies
-
-# arbitrary directory, refers to containers directory.
 WORKDIR /app
 
-COPY ./package.json ./package-lock.json ./
+# Prisma needs openssl on slim images
+RUN apt-get update -y && apt-get install -y openssl && rm -rf /var/lib/apt/lists/*
 
-RUN npm install
+COPY package.json package-lock.json ./
+RUN npm ci
 
-COPY ./ .
+COPY . .
 
-CMD ["npm", "run", "dev"]
+ARG DATABASE_URL
+ENV DATABASE_URL=$DATABASE_URL
 
+RUN npx prisma generate
+RUN npm run build
 
-
-
-
+ENV NODE_ENV=production
+CMD ["sh", "-c", "npx prisma migrate deploy && npm run start"]
